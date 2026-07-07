@@ -13,16 +13,28 @@ import { supabase } from "@/integrations/supabase/client";
 export const Route = createFileRoute("/_authenticated/admin/stats")({
   ssr: false,
   beforeLoad: async () => {
-    const { data: userData } = await supabase.auth.getUser();
-    if (!userData.user) throw redirect({ to: "/auth" });
-    const { data: roles } = await supabase
-      .from("user_roles")
-      .select("role")
-      .eq("user_id", userData.user.id)
-      .eq("role", "admin")
-      .maybeSingle();
-    if (!roles) {
-      await supabase.auth.signOut();
+    const AUTH_TIMEOUT_MS = 8000;
+    const withTimeout = <T,>(p: PromiseLike<T>) =>
+      Promise.race([
+        Promise.resolve(p).catch(() => null),
+        new Promise<null>((resolve) =>
+          setTimeout(() => resolve(null), AUTH_TIMEOUT_MS),
+        ),
+      ]);
+
+    const userRes = await withTimeout(supabase.auth.getUser());
+    if (!userRes || !userRes.data.user) throw redirect({ to: "/auth" });
+
+    const rolesRes = await withTimeout(
+      supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", userRes.data.user.id)
+        .eq("role", "admin")
+        .maybeSingle(),
+    );
+    if (!rolesRes || !rolesRes.data) {
+      await supabase.auth.signOut().catch(() => {});
       throw redirect({ to: "/auth" });
     }
   },

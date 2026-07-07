@@ -34,11 +34,16 @@ function AuthPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => {
-      if (data.user) {
-        window.location.href = safeNext ?? "/admin";
-      }
-    });
+    supabase.auth
+      .getUser()
+      .then(({ data }) => {
+        if (data.user) {
+          window.location.href = safeNext ?? "/admin";
+        }
+      })
+      .catch(() => {
+        /* backend indisponível — deixa o usuário tentar o login manualmente */
+      });
   }, [safeNext]);
 
   async function onSubmit(e: React.FormEvent) {
@@ -72,7 +77,20 @@ function AuthPage() {
       if (error) throw error;
       window.location.href = safeNext ?? "/admin";
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Erro ao autenticar");
+      const msg = err instanceof Error ? err.message : "";
+      if (/load failed|failed to fetch|networkerror|timeout|fetch/i.test(msg)) {
+        setError(
+          "Não foi possível conectar ao servidor. O painel pode estar iniciando — aguarde alguns segundos e tente novamente. Se persistir, o projeto Supabase pode estar pausado.",
+        );
+      } else if (/email not confirmed/i.test(msg)) {
+        setError(
+          "Cadastro pendente de confirmação de email. Desative a confirmação de email no Supabase (Auth → Providers → Email) e tente de novo.",
+        );
+      } else if (/invalid.*credentials/i.test(msg)) {
+        setError("Email ou senha incorretos.");
+      } else {
+        setError(msg || "Erro ao autenticar");
+      }
     } finally {
       setLoading(false);
     }
