@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Hero } from "@/components/noir/Hero";
+import { Highlights } from "@/components/noir/Highlights";
 import { Problem } from "@/components/noir/Problem";
 import { ForWhom } from "@/components/noir/ForWhom";
 import { HowItWorks } from "@/components/noir/HowItWorks";
@@ -49,6 +50,7 @@ function LandingPage() {
     <main className="min-h-screen bg-background text-foreground">
       <Hero />
       <Divider />
+      <Highlights />
       <Problem />
       <ForWhom />
       <HowItWorks />

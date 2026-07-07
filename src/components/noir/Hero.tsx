@@ -29,13 +29,7 @@ export function Hero() {
           estruturar e escalar sua operação de agência.
         </h1>
 
-        <p className="mt-8 max-w-xl font-sans text-base leading-relaxed text-muted-foreground sm:text-lg">
-          6 encontros individuais de até 2 horas com o Rafa e toda a equipe da
-          operação, análise completa da sua agência e uma visita presencial ao
-          escritório onde tudo acontece.
-        </p>
-
-        <div className="mt-14 flex flex-col items-center gap-3">
+        <div className="mt-16 flex flex-col items-center gap-3">
           <span className="font-sans text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
             Role para descobrir
           </span>
