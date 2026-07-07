@@ -279,12 +279,21 @@ export function ApplicationForm() {
             type="checkbox"
             required
             checked={consent}
-            onChange={(e) => setConsent(e.target.checked)}
+            onChange={(e) => {
+              e.target.setCustomValidity("");
+              setConsent(e.target.checked);
+            }}
+            onInvalid={(e) =>
+              e.currentTarget.setCustomValidity(
+                "É necessário marcar esta caixa para enviar a candidatura.",
+              )
+            }
             className="mt-1 h-4 w-4 shrink-0 cursor-pointer accent-[color:var(--gold)]"
           />
           <span className="font-sans text-[13px] leading-relaxed text-muted-foreground">
             Autorizo o contato por telefone e WhatsApp e o uso dos meus dados
-            para essa finalidade.
+            para essa finalidade.{" "}
+            <span className="text-gold-gradient">*</span>
           </span>
         </label>
 
