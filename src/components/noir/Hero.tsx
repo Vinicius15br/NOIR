@@ -31,19 +31,19 @@ export function Hero() {
         </h1>
 
         <p className="mt-8 max-w-xl font-sans text-base leading-relaxed text-muted-foreground sm:text-lg">
-          6 encontros individuais de até 2 horas com o Rafa, análise completa
-          da sua operação e uma visita presencial ao escritório da agência.
-          Entrada por aplicação.
+          6 encontros individuais de até 2 horas com o Rafa e toda a equipe da
+          operação, análise completa da sua agência e uma visita presencial ao
+          escritório onde tudo acontece.
         </p>
 
         <div className="mt-12 flex w-full flex-col items-center gap-4 sm:w-auto">
-          <GoldButton href="#aplicar">
-            QUERO APLICAR
+          <GoldButton href="#candidatura">
+            QUERO ME CANDIDATAR
             <br />
-            PARA UMA VAGA
+            A UMA VAGA
           </GoldButton>
           <p className="max-w-sm text-center font-sans text-xs leading-relaxed text-muted-foreground whitespace-pre-line">
-            Preencha a aplicação e nossa equipe{"\n"}entra em contato por ligação.
+            Preencha o formulário e nossa equipe{"\n"}entra em contato por ligação.
           </p>
         </div>
       </div>

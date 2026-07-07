@@ -37,7 +37,7 @@ export function Investment() {
         <div className="hidden h-24 w-px bg-gradient-to-b from-transparent via-[color:var(--gold)]/40 to-transparent sm:block" />
         <div className="sm:pl-2">
           <p className="font-sans text-[13px] leading-relaxed text-muted-foreground">
-            Por ser individual e limitado, a entrada é por aplicação.
+            Por ser individual e limitado, a entrada é por candidatura.
           </p>
         </div>
       </div>
@@ -56,7 +56,7 @@ export function Investment() {
       </ol>
 
       <div className="mt-12 flex flex-col items-start gap-4">
-        <GoldButton href="#aplicar">GARANTIR MINHA VAGA</GoldButton>
+        <GoldButton href="#candidatura">GARANTIR MINHA VAGA</GoldButton>
         <p className="font-sans text-xs leading-relaxed text-muted-foreground">
           {"\n"}
         </p>

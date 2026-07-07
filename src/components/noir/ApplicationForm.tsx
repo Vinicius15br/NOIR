@@ -143,7 +143,7 @@ export function ApplicationForm() {
 
   if (done) {
     return (
-      <Section id="aplicar" eyebrow="Aplicação recebida">
+      <Section id="candidatura" eyebrow="Candidatura recebida">
         <div className="relative overflow-hidden rounded-sm border border-gold-soft bg-card/60 p-10 text-center backdrop-blur-sm sm:p-14">
           <div className="mb-6 flex items-center justify-center gap-3">
             <span className="h-px w-10 bg-gold-gradient" />
@@ -151,7 +151,7 @@ export function ApplicationForm() {
             <span className="h-px w-10 bg-gold-gradient" />
           </div>
           <h2 className="font-serif text-3xl font-normal text-foreground sm:text-4xl">
-            Aplicação recebida
+            Candidatura recebida
           </h2>
           <p className="mx-auto mt-6 max-w-md font-sans text-[15px] leading-relaxed text-muted-foreground">
             Nossa equipe vai te ligar em até <span className="text-foreground">24h úteis</span>
@@ -172,9 +172,9 @@ export function ApplicationForm() {
   }
 
   return (
-    <Section id="aplicar" eyebrow="Formulário de aplicação" className="pb-32">
+    <Section id="candidatura" eyebrow="Formulário de candidatura" className="pb-32">
       <h2 className="font-serif text-3xl leading-tight font-normal text-foreground sm:text-5xl">
-        Aplique para uma das{" "}
+        Candidate-se para uma das{" "}
         <span className="italic text-gold-gradient">vagas</span>
       </h2>
       <p className="mt-6 font-sans text-base leading-relaxed text-muted-foreground">
@@ -299,7 +299,7 @@ export function ApplicationForm() {
 
         <div className="pt-2">
           <GoldButton type="submit" disabled={submitting}>
-            {submitting ? "Enviando…" : "Enviar aplicação"}
+            {submitting ? "Enviando…" : "Enviar candidatura"}
           </GoldButton>
         </div>
       </form>

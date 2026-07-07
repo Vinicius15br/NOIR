@@ -24,7 +24,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "6 encontros individuais de até 2h com Rafa + visita presencial ao escritório da agência. Poucas vagas por ciclo, entrada por aplicação.",
+          "6 encontros individuais de até 2h com o Rafa e toda a equipe da operação + visita presencial ao escritório da agência. Poucas vagas por ciclo, entrada por candidatura.",
       },
       {
         property: "og:title",
@@ -33,7 +33,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Análise completa da sua operação de agência, 6 calls individuais e visita presencial. Entrada por aplicação.",
+          "Análise completa da sua operação de agência, 6 calls individuais e visita presencial. Entrada por candidatura.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

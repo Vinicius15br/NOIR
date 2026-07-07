@@ -78,7 +78,7 @@ export const submitApplication = createServerFn({ method: "POST" })
 
     if (error) {
       console.error("submitApplication error:", error);
-      throw new Error("Não foi possível enviar sua aplicação. Tente novamente.");
+      throw new Error("Não foi possível enviar sua candidatura. Tente novamente.");
     }
 
     return { ok: true as const };

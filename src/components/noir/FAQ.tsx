@@ -29,7 +29,7 @@ const faqs = [
   },
   {
     q: "Existe parcelamento?",
-    a: "Sim. As condições são apresentadas na call de aplicação.",
+    a: "Sim. As condições são apresentadas na call de candidatura.",
   },
   {
     q: "O que justifica o valor?",
