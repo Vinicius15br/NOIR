@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-DGeXAQPT.js";var t=e(),n=({error:e})=>(0,t.jsx)(`main`,{className:`min-h-screen flex items-center justify-center bg-background text-foreground px-4`,children:(0,t.jsxs)(`p`,{className:`text-sm text-muted-foreground`,children:[`Não foi possível carregar esta autorização:`,` `,String(e?.message??e)]})});export{n as errorComponent};
