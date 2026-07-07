@@ -11,6 +11,7 @@ import { FAQ } from "@/components/noir/FAQ";
 import { ApplicationForm } from "@/components/noir/ApplicationForm";
 import { Footer } from "@/components/noir/Footer";
 import { Divider } from "@/components/noir/Section";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -41,6 +42,8 @@ export const Route = createFileRoute("/")({
 });
 
 function LandingPage() {
+  useScrollReveal();
+
   return (
     <main className="min-h-screen bg-background text-foreground">
       <Hero />
