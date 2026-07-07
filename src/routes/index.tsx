@@ -3,6 +3,7 @@ import { Hero } from "@/components/noir/Hero";
 import { Problem } from "@/components/noir/Problem";
 import { ForWhom } from "@/components/noir/ForWhom";
 import { HowItWorks } from "@/components/noir/HowItWorks";
+import { Proof } from "@/components/noir/Proof";
 import { OfficeVisit } from "@/components/noir/OfficeVisit";
 import { Mentor } from "@/components/noir/Mentor";
 import { Bonus } from "@/components/noir/Bonus";
@@ -51,6 +52,7 @@ function LandingPage() {
       <Problem />
       <ForWhom />
       <HowItWorks />
+      <Proof />
       <OfficeVisit />
       <Mentor />
       <Bonus />
