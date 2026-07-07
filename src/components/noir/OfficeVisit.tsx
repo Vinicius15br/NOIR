@@ -28,7 +28,7 @@ export function OfficeVisit() {
             A visita é agendada em data disponível de ambas as partes e
             acontece mediante termo de confidencialidade — protegemos os dados
             das nossas creators e você verá uma operação real, não um cenário
-            montado. Deslocamento e hospedagem por conta do mentorado.
+            montado.
           </p>
         </div>
       </div>

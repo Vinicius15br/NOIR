@@ -25,7 +25,7 @@ const faqs = [
   },
   {
     q: "Como funciona a visita ao escritório?",
-    a: "Agendada em data combinada, mediante termo de confidencialidade. Deslocamento e hospedagem por conta do mentorado.",
+    a: "Agendada em data combinada, mediante termo de confidencialidade.",
   },
   {
     q: "Existe parcelamento?",
