@@ -10,8 +10,8 @@ const items = [
     body: "Pra revisitar decisões e planos sempre que precisar.",
   },
   {
-    title: "Acesso às gravações da turma em grupo anterior",
-    body: "Você começa a consumir conteúdo antes mesmo da primeira call.",
+    title: "Acesso ao advogado e contador da operação",
+    body: "Tire dúvidas jurídicas e contábeis com os mesmos profissionais que cuidam da nossa agência — pra você estruturar a sua com segurança.",
   },
 ];
 
