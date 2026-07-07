@@ -1,4 +1,3 @@
-import { GoldButton } from "./GoldButton";
 import { Section } from "./Section";
 
 const steps = [
@@ -54,13 +53,6 @@ export function Investment() {
           </li>
         ))}
       </ol>
-
-      <div className="mt-12 flex flex-col items-start gap-4">
-        <GoldButton href="#candidatura">GARANTIR MINHA VAGA</GoldButton>
-        <p className="font-sans text-xs leading-relaxed text-muted-foreground">
-          {"\n"}
-        </p>
-      </div>
     </Section>
   );
 }

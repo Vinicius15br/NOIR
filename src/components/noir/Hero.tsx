@@ -1,4 +1,3 @@
-import { GoldButton } from "./GoldButton";
 import { Wordmark } from "./Wordmark";
 
 export function Hero() {
@@ -36,15 +35,14 @@ export function Hero() {
           escritório onde tudo acontece.
         </p>
 
-        <div className="mt-12 flex w-full flex-col items-center gap-4 sm:w-auto">
-          <GoldButton href="#candidatura">
-            QUERO ME CANDIDATAR
-            <br />
-            A UMA VAGA
-          </GoldButton>
-          <p className="max-w-sm text-center font-sans text-xs leading-relaxed text-muted-foreground whitespace-pre-line">
-            Preencha o formulário e nossa equipe{"\n"}entra em contato por ligação.
-          </p>
+        <div className="mt-14 flex flex-col items-center gap-3">
+          <span className="font-sans text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
+            Role para descobrir
+          </span>
+          <span
+            aria-hidden
+            className="h-10 w-px animate-pulse bg-gradient-to-b from-[color:var(--gold)]/70 to-transparent"
+          />
         </div>
       </div>
     </header>
