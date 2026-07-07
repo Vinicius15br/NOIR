@@ -29,26 +29,6 @@ export function Mentor() {
         </div>
       </div>
 
-      <div className="mt-14">
-        <div className="mb-5 flex items-center gap-3">
-          <span className="h-px w-8 bg-gold-gradient" />
-          <span className="font-sans text-[10px] uppercase tracking-[0.28em] text-muted-foreground">
-            Prova social
-          </span>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-3">
-          {[1, 2, 3].map((i) => (
-            <div
-              key={i}
-              className="flex aspect-[4/5] items-center justify-center rounded-sm border border-dashed border-border/70 bg-card/30 text-center"
-            >
-              <span className="font-sans text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
-                Inserir print /<br />depoimento {i}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
     </Section>
   );
 }
