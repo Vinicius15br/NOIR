@@ -9,11 +9,14 @@ export function Mentor() {
       </h2>
 
       <div className="mt-12 grid gap-8 sm:grid-cols-[180px_1fr] sm:items-start">
-        <div className="mx-auto flex h-44 w-44 shrink-0 items-center justify-center rounded-sm border border-gold-soft bg-card/60 sm:mx-0">
-          <span className="text-center font-sans text-[10px] uppercase tracking-[0.28em] text-muted-foreground">
-            [ Foto do Rafa ]
-          </span>
-        </div>
+        <img
+          src="/rafa.jpg"
+          alt="Rafael Nepomuceno, fundador da Hottisie"
+          width={720}
+          height={936}
+          loading="lazy"
+          className="mx-auto h-56 w-44 shrink-0 rounded-sm border border-gold-soft object-cover object-[center_18%] sm:mx-0"
+        />
         <div className="min-w-0">
           <h3 className="font-serif text-2xl font-semibold text-gold-gradient">
             Rafael Nepomuceno
