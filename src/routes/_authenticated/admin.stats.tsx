@@ -244,7 +244,7 @@ function StatsPage() {
     : 0;
   const revenueEmptyCount = totalCount - revenueFilled;
 
-  // Safra por período de criação — usa events para saber o que aconteceu depois
+  // Agrupamento por período de criação — usa events para saber o que aconteceu depois
   const cohortSinceMs = Date.now() - cohortDays * 24 * 60 * 60 * 1000;
   const cohortLeads = (data ?? []).filter(
     (a) => new Date(a.created_at).getTime() >= cohortSinceMs,
@@ -254,7 +254,7 @@ function StatsPage() {
     cohortIds.has(e.application_id),
   );
 
-  // Para cada lead da safra, ver quais estados ele passou (baseado em events)
+  // Para cada lead do período, ver quais estados ele passou (baseado em events)
   const cohortByLead = new Map<string, typeof cohortEvents>();
   for (const e of cohortEvents) {
     const arr = cohortByLead.get(e.application_id) ?? [];
@@ -325,7 +325,7 @@ function StatsPage() {
   const cycleMinMs = cycleMsList.length ? Math.min(...cycleMsList) : null;
   const cycleMaxMs = cycleMsList.length ? Math.max(...cycleMsList) : null;
 
-  // Safras semanais — agrupa leads por semana ISO (segunda) de criação
+  // Períodos semanais — agrupa leads por semana ISO (segunda) de criação
   const uniqueSourcesStats = Array.from(
     new Set(
       (data ?? [])
@@ -651,7 +651,7 @@ function StatsPage() {
                 Visão geral
               </TabsTrigger>
               <TabsTrigger value="coortes" className={tabCls}>
-                Safras
+                Períodos
               </TabsTrigger>
               <TabsTrigger value="tempo" className={tabCls}>
                 Tempo &amp; ligações
@@ -884,10 +884,10 @@ function StatsPage() {
             </TabsContent>
 
             <TabsContent value="coortes" className="flex flex-col gap-4">
-            {/* Safra por período */}
+            {/* Funil por período */}
             <section className="order-1 rounded-xl border border-border/60 bg-gradient-to-b from-card/70 to-card/20 p-5 sm:p-6">
               <div className="flex items-baseline justify-between gap-2 text-[10px] uppercase tracking-[0.22em] text-gold-gradient font-semibold">
-                <span>Funil por safra</span>
+                <span>Funil por período</span>
                 <div className="flex gap-1">
                   {([7, 30, 90, 365] as const).map((d) => (
                     <button
@@ -922,7 +922,7 @@ function StatsPage() {
                       label="Contatados"
                       value={cohortContacted}
                       rate={pct(cohortContacted, cohortTotal)}
-                      subLabel="da safra"
+                      subLabel="do período"
                     />
                     <FunnelStage
                       label="Fechados"
@@ -935,11 +935,11 @@ function StatsPage() {
                       label="Perdidos"
                       value={cohortLost}
                       rate={pct(cohortLost, cohortTotal)}
-                      subLabel="da safra"
+                      subLabel="do período"
                     />
                   </div>
                   <p className="mt-3 text-[10px] text-muted-foreground/70">
-                    Taxa criados → fechados nessa safra:{" "}
+                    Taxa criados → fechados nesse período:{" "}
                     <span className="text-foreground">
                       {pct(cohortClosed, cohortTotal)}
                     </span>
@@ -963,11 +963,11 @@ function StatsPage() {
               )}
             </section>
 
-            {/* Safras semanais */}
+            {/* Períodos semanais */}
             <section className="order-2 rounded-xl border border-border/60 bg-gradient-to-b from-card/70 to-card/20 p-5 sm:p-6">
               <div className="mb-2 flex flex-wrap items-baseline justify-between gap-2">
                 <p className="text-[10px] uppercase tracking-[0.22em] text-gold-gradient font-semibold">
-                  Safras semanais
+                  Períodos semanais
                 </p>
                 <div className="flex items-center gap-2 text-[10px]">
                   <span className="uppercase tracking-widest text-muted-foreground/70">
@@ -989,7 +989,7 @@ function StatsPage() {
                 </div>
               </div>
               <p className="mb-3 text-[11px] text-muted-foreground/70">
-                Compara qualidade de lead entre semanas — % que fechou de cada safra de aplicação.
+                Compara qualidade de lead entre semanas — % que fechou de cada período de aplicação.
               </p>
               {weeklyRows.length === 0 ? (
                 <p className="text-xs text-muted-foreground">Sem leads nessa origem.</p>
