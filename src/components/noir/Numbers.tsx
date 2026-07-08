@@ -27,12 +27,21 @@ export function Numbers() {
         {stats.map((s) => (
           <div
             key={s.label}
-            className="rounded-sm border border-gold-soft bg-card/50 p-8 text-center"
+            className="group relative overflow-hidden rounded-lg border border-gold-soft bg-gradient-to-br from-card/70 to-card/15 p-8 text-center transition-all duration-300 hover:border-[color:var(--gold)]/60 hover:shadow-[0_0_45px_-14px_rgba(212,175,55,0.45)]"
           >
-            <p className="font-serif text-3xl font-normal text-gold-gradient sm:text-4xl">
+            {/* brilho radial sutil no fundo */}
+            <span
+              aria-hidden
+              className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(212,175,55,0.1),transparent_65%)]"
+            />
+            <p className="relative font-serif text-3xl font-normal text-gold-gradient sm:text-4xl">
               {s.value}
             </p>
-            <p className="mt-3 font-sans text-[13px] uppercase tracking-[0.18em] text-muted-foreground">
+            <span
+              aria-hidden
+              className="relative mx-auto mt-4 block h-px w-8 bg-gold-gradient opacity-60"
+            />
+            <p className="relative mt-4 font-sans text-[13px] uppercase tracking-[0.18em] text-muted-foreground">
               {s.label}
             </p>
           </div>

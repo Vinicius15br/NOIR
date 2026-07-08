@@ -1,4 +1,5 @@
 import { createFileRoute, redirect, Link } from "@tanstack/react-router";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
@@ -627,7 +628,15 @@ function StatsPage() {
         )}
 
         {data && data.length > 0 && (
-          <div className="space-y-4">
+          <Tabs defaultValue="visao" className="w-full">
+            <TabsList className="mb-5 flex h-auto flex-wrap justify-start gap-1.5 border border-border/40 bg-card/40 p-1.5">
+              <TabsTrigger value="visao">Visão geral</TabsTrigger>
+              <TabsTrigger value="coortes">Coortes</TabsTrigger>
+              <TabsTrigger value="tempo">Tempo &amp; ligações</TabsTrigger>
+              <TabsTrigger value="faturamento">Faturamento</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="visao" className="space-y-4">
             {/* Funil */}
             <section className="rounded-lg border border-border/50 bg-card/40 p-4">
               <p className="mb-3 text-[10px] uppercase tracking-widest text-muted-foreground">
@@ -847,6 +856,9 @@ function StatsPage() {
 
 
 
+            </TabsContent>
+
+            <TabsContent value="coortes" className="space-y-4">
             {/* Coorte por período */}
             <section className="rounded-lg border border-border/50 bg-card/40 p-4">
               <div className="flex items-baseline justify-between gap-2 text-[10px] uppercase tracking-widest text-muted-foreground">
@@ -1013,6 +1025,9 @@ function StatsPage() {
               )}
             </section>
 
+            </TabsContent>
+
+            <TabsContent value="tempo" className="space-y-4">
             {/* Quando o lead aplica */}
             <section className="rounded-lg border border-border/50 bg-card/40 p-4">
               <p className="mb-1 text-[10px] uppercase tracking-widest text-muted-foreground">
@@ -1597,6 +1612,9 @@ function StatsPage() {
               )}
             </section>
 
+            </TabsContent>
+
+            <TabsContent value="faturamento" className="space-y-4">
             {/* Faturamento */}
             <section className="rounded-lg border border-border/50 bg-card/40 p-4">
               <div className="flex items-baseline justify-between text-[10px] uppercase tracking-widest text-muted-foreground">
@@ -1660,7 +1678,8 @@ function StatsPage() {
                 </p>
               )}
             </section>
-          </div>
+            </TabsContent>
+          </Tabs>
         )}
       </div>
     </main>
