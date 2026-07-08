@@ -63,6 +63,9 @@ function pct(n: number, d: number) {
   return `${Math.round((n / d) * 100)}%`;
 }
 
+const tabCls =
+  "rounded-lg border border-transparent px-3.5 py-1.5 text-[13px] font-medium tracking-wide text-muted-foreground transition-all hover:text-foreground data-[state=active]:border-[color:var(--gold)]/40 data-[state=active]:bg-[color:var(--gold)]/10 data-[state=active]:text-foreground data-[state=active]:shadow-none";
+
 function StatsPage() {
   const fetchList = useServerFn(listApplications);
   const { data, isLoading, error } = useQuery({
@@ -588,21 +591,35 @@ function StatsPage() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <header className="border-b border-border/40">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <header className="relative overflow-hidden border-b border-border/40">
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gold-gradient opacity-50"
+        />
+        <span
+          aria-hidden
+          className="pointer-events-none absolute -left-24 -top-24 h-56 w-56 rounded-full bg-[radial-gradient(circle,oklch(0.82_0.13_85/14%),transparent_70%)] blur-2xl"
+        />
+        <div className="relative mx-auto flex max-w-6xl items-center justify-between px-5 py-7">
           <div>
-            <h1 className="font-serif text-xl text-gold-gradient">
+            <div className="mb-2.5 flex items-center gap-2.5">
+              <span className="h-px w-6 bg-gold-gradient" />
+              <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.3em] text-gold-gradient">
+                Noir Sessions · Painel
+              </span>
+            </div>
+            <h1 className="font-serif text-3xl font-normal text-foreground sm:text-4xl">
               Estatísticas
             </h1>
-            <p className="text-xs text-muted-foreground">
+            <p className="mt-1.5 font-sans text-xs text-muted-foreground">
               {data ? `${data.length} aplicações no total` : "Carregando…"}
             </p>
           </div>
           <Link
             to="/admin"
-            className="text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground"
+            className="font-sans text-[10px] uppercase tracking-[0.22em] text-muted-foreground transition-colors hover:text-foreground"
           >
-            ← Voltar ao painel
+            ← Voltar
           </Link>
         </div>
       </header>
@@ -629,17 +646,25 @@ function StatsPage() {
 
         {data && data.length > 0 && (
           <Tabs defaultValue="visao" className="w-full">
-            <TabsList className="mb-5 flex h-auto flex-wrap justify-start gap-1.5 border border-border/40 bg-card/40 p-1.5">
-              <TabsTrigger value="visao">Visão geral</TabsTrigger>
-              <TabsTrigger value="coortes">Coortes</TabsTrigger>
-              <TabsTrigger value="tempo">Tempo &amp; ligações</TabsTrigger>
-              <TabsTrigger value="faturamento">Faturamento</TabsTrigger>
+            <TabsList className="mb-6 flex h-auto flex-wrap justify-start gap-1.5 rounded-xl border border-border/50 bg-card/40 p-1.5">
+              <TabsTrigger value="visao" className={tabCls}>
+                Visão geral
+              </TabsTrigger>
+              <TabsTrigger value="coortes" className={tabCls}>
+                Coortes
+              </TabsTrigger>
+              <TabsTrigger value="tempo" className={tabCls}>
+                Tempo &amp; ligações
+              </TabsTrigger>
+              <TabsTrigger value="faturamento" className={tabCls}>
+                Faturamento
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="visao" className="flex flex-col gap-4">
             {/* Funil */}
-            <section className="order-1 rounded-lg border border-border/50 bg-card/40 p-4">
-              <p className="mb-3 text-[10px] uppercase tracking-widest text-muted-foreground">
+            <section className="order-1 rounded-xl border border-border/60 bg-gradient-to-b from-card/70 to-card/20 p-5 sm:p-6">
+              <p className="mb-3 text-[10px] uppercase tracking-[0.22em] text-gold-gradient font-semibold">
                 Funil
               </p>
               <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -673,9 +698,9 @@ function StatsPage() {
             </section>
 
             {/* Abandono do formulário */}
-            <section className="order-3 rounded-lg border border-border/50 bg-card/40 p-4">
+            <section className="order-3 rounded-xl border border-border/60 bg-gradient-to-b from-card/70 to-card/20 p-5 sm:p-6">
               <div className="mb-1 flex items-baseline justify-between gap-2">
-                <p className="text-[10px] uppercase tracking-widest text-muted-foreground">
+                <p className="text-[10px] uppercase tracking-[0.22em] text-gold-gradient font-semibold">
                   Abandono do formulário
                 </p>
                 <div className="flex gap-1 text-[10px]">
@@ -786,7 +811,7 @@ function StatsPage() {
 
             <section className="order-2 rounded-lg border border-[color:var(--gold)]/30 bg-gradient-to-br from-[color:var(--gold)]/[0.06] to-transparent p-4">
               <div className="flex items-baseline justify-between gap-2">
-                <p className="text-[10px] uppercase tracking-widest text-muted-foreground">
+                <p className="text-[10px] uppercase tracking-[0.22em] text-gold-gradient font-semibold">
                   Pipeline projetado
                 </p>
                 <p className="text-[10px] uppercase tracking-widest text-muted-foreground/70">
@@ -860,8 +885,8 @@ function StatsPage() {
 
             <TabsContent value="coortes" className="flex flex-col gap-4">
             {/* Coorte por período */}
-            <section className="order-1 rounded-lg border border-border/50 bg-card/40 p-4">
-              <div className="flex items-baseline justify-between gap-2 text-[10px] uppercase tracking-widest text-muted-foreground">
+            <section className="order-1 rounded-xl border border-border/60 bg-gradient-to-b from-card/70 to-card/20 p-5 sm:p-6">
+              <div className="flex items-baseline justify-between gap-2 text-[10px] uppercase tracking-[0.22em] text-gold-gradient font-semibold">
                 <span>Funil por coorte</span>
                 <div className="flex gap-1">
                   {([7, 30, 90, 365] as const).map((d) => (
@@ -939,9 +964,9 @@ function StatsPage() {
             </section>
 
             {/* Coortes semanais */}
-            <section className="order-2 rounded-lg border border-border/50 bg-card/40 p-4">
+            <section className="order-2 rounded-xl border border-border/60 bg-gradient-to-b from-card/70 to-card/20 p-5 sm:p-6">
               <div className="mb-2 flex flex-wrap items-baseline justify-between gap-2">
-                <p className="text-[10px] uppercase tracking-widest text-muted-foreground">
+                <p className="text-[10px] uppercase tracking-[0.22em] text-gold-gradient font-semibold">
                   Coortes semanais
                 </p>
                 <div className="flex items-center gap-2 text-[10px]">
@@ -1029,8 +1054,8 @@ function StatsPage() {
 
             <TabsContent value="tempo" className="flex flex-col gap-4">
             {/* Quando o lead aplica */}
-            <section className="order-8 rounded-lg border border-border/50 bg-card/40 p-4">
-              <p className="mb-1 text-[10px] uppercase tracking-widest text-muted-foreground">
+            <section className="order-8 rounded-xl border border-border/60 bg-gradient-to-b from-card/70 to-card/20 p-5 sm:p-6">
+              <p className="mb-1 text-[10px] uppercase tracking-[0.22em] text-gold-gradient font-semibold">
                 Quando o lead aplica
               </p>
               <p className="mb-3 text-[11px] text-muted-foreground/70">
@@ -1178,8 +1203,8 @@ function StatsPage() {
 
 
             {/* Ligações por dia */}
-            <section className="order-7 rounded-lg border border-border/50 bg-card/40 p-4">
-              <p className="mb-1 text-[10px] uppercase tracking-widest text-muted-foreground">
+            <section className="order-7 rounded-xl border border-border/60 bg-gradient-to-b from-card/70 to-card/20 p-5 sm:p-6">
+              <p className="mb-1 text-[10px] uppercase tracking-[0.22em] text-gold-gradient font-semibold">
                 Ligações por dia
               </p>
               <p className="mb-3 text-[11px] text-muted-foreground/70">
@@ -1251,8 +1276,8 @@ function StatsPage() {
             </section>
 
             {/* TTFC */}
-            <section className="order-1 rounded-lg border border-border/50 bg-card/40 p-4">
-              <p className="mb-3 text-[10px] uppercase tracking-widest text-muted-foreground">
+            <section className="order-1 rounded-xl border border-border/60 bg-gradient-to-b from-card/70 to-card/20 p-5 sm:p-6">
+              <p className="mb-3 text-[10px] uppercase tracking-[0.22em] text-gold-gradient font-semibold">
                 Tempo até 1º contato
               </p>
 
@@ -1288,8 +1313,8 @@ function StatsPage() {
             </section>
 
             {/* Velocidade de contato × conversão */}
-            <section className="order-6 rounded-lg border border-border/50 bg-card/40 p-4">
-              <p className="mb-1 text-[10px] uppercase tracking-widest text-muted-foreground">
+            <section className="order-6 rounded-xl border border-border/60 bg-gradient-to-b from-card/70 to-card/20 p-5 sm:p-6">
+              <p className="mb-1 text-[10px] uppercase tracking-[0.22em] text-gold-gradient font-semibold">
                 Velocidade de contato × conversão
               </p>
               <p className="mb-3 text-[11px] text-muted-foreground/70">
@@ -1395,8 +1420,8 @@ function StatsPage() {
 
 
             {/* Ciclo de venda */}
-            <section className="order-3 rounded-lg border border-border/50 bg-card/40 p-4">
-              <p className="mb-3 text-[10px] uppercase tracking-widest text-muted-foreground">
+            <section className="order-3 rounded-xl border border-border/60 bg-gradient-to-b from-card/70 to-card/20 p-5 sm:p-6">
+              <p className="mb-3 text-[10px] uppercase tracking-[0.22em] text-gold-gradient font-semibold">
                 Ciclo de venda
               </p>
               {cycleMsList.length === 0 ? (
@@ -1435,8 +1460,8 @@ function StatsPage() {
             </section>
 
             {/* Aging por etapa */}
-            <section className="order-5 rounded-lg border border-border/50 bg-card/40 p-4">
-              <p className="mb-1 text-[10px] uppercase tracking-widest text-muted-foreground">
+            <section className="order-5 rounded-xl border border-border/60 bg-gradient-to-b from-card/70 to-card/20 p-5 sm:p-6">
+              <p className="mb-1 text-[10px] uppercase tracking-[0.22em] text-gold-gradient font-semibold">
                 Tempo parado em cada etapa
               </p>
               <p className="mb-3 text-[11px] text-muted-foreground/70">
@@ -1519,8 +1544,8 @@ function StatsPage() {
 
 
 
-            <section className="order-4 rounded-lg border border-border/50 bg-card/40 p-4">
-              <div className="flex items-baseline justify-between text-[10px] uppercase tracking-widest text-muted-foreground">
+            <section className="order-4 rounded-xl border border-border/60 bg-gradient-to-b from-card/70 to-card/20 p-5 sm:p-6">
+              <div className="flex items-baseline justify-between text-[10px] uppercase tracking-[0.22em] text-gold-gradient font-semibold">
                 <span>Tentativas até contato</span>
                 <span className="text-muted-foreground/70 normal-case tracking-normal">
                   média{" "}
@@ -1580,8 +1605,8 @@ function StatsPage() {
             </section>
 
             {/* Momento */}
-            <section className="order-2 rounded-lg border border-border/50 bg-card/40 p-4">
-              <div className="flex items-baseline justify-between text-[10px] uppercase tracking-widest text-muted-foreground">
+            <section className="order-2 rounded-xl border border-border/60 bg-gradient-to-b from-card/70 to-card/20 p-5 sm:p-6">
+              <div className="flex items-baseline justify-between text-[10px] uppercase tracking-[0.22em] text-gold-gradient font-semibold">
                 <span>Distribuição por momento</span>
                 <span className="text-muted-foreground/70 normal-case tracking-normal">
                   {rodandoCount + zeroCount} de {totalCount}
@@ -1616,8 +1641,8 @@ function StatsPage() {
 
             <TabsContent value="faturamento" className="flex flex-col gap-4">
             {/* Faturamento */}
-            <section className="rounded-lg border border-border/50 bg-card/40 p-4">
-              <div className="flex items-baseline justify-between text-[10px] uppercase tracking-widest text-muted-foreground">
+            <section className="rounded-xl border border-border/60 bg-gradient-to-b from-card/70 to-card/20 p-5 sm:p-6">
+              <div className="flex items-baseline justify-between text-[10px] uppercase tracking-[0.22em] text-gold-gradient font-semibold">
                 <span>Distribuição por faturamento</span>
                 <span className="text-muted-foreground/70 normal-case tracking-normal">
                   preenchido{" "}
@@ -1701,17 +1726,17 @@ function FunnelStage({
 }) {
   return (
     <div
-      className={`rounded-md border p-3 ${
+      className={`rounded-lg border p-3.5 transition-colors ${
         accent
-          ? "border-[color:var(--gold)]/50 bg-[color:var(--gold)]/5"
-          : "border-border/50 bg-background/40"
+          ? "border-[color:var(--gold)]/50 bg-gradient-to-b from-[color:var(--gold)]/[0.1] to-transparent"
+          : "border-border/50 bg-gradient-to-b from-background/60 to-background/20"
       }`}
     >
-      <p className="text-[10px] uppercase tracking-widest text-muted-foreground">
+      <p className="text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
         {label}
       </p>
       <p
-        className={`mt-1 font-serif text-2xl leading-none sm:text-3xl ${
+        className={`mt-1.5 font-serif text-2xl leading-none sm:text-3xl ${
           accent ? "text-gold-gradient" : "text-foreground"
         }`}
       >
