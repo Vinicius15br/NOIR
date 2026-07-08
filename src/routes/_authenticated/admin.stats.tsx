@@ -636,9 +636,9 @@ function StatsPage() {
               <TabsTrigger value="faturamento">Faturamento</TabsTrigger>
             </TabsList>
 
-            <TabsContent value="visao" className="space-y-4">
+            <TabsContent value="visao" className="flex flex-col gap-4">
             {/* Funil */}
-            <section className="rounded-lg border border-border/50 bg-card/40 p-4">
+            <section className="order-1 rounded-lg border border-border/50 bg-card/40 p-4">
               <p className="mb-3 text-[10px] uppercase tracking-widest text-muted-foreground">
                 Funil
               </p>
@@ -673,7 +673,7 @@ function StatsPage() {
             </section>
 
             {/* Abandono do formulário */}
-            <section className="rounded-lg border border-border/50 bg-card/40 p-4">
+            <section className="order-3 rounded-lg border border-border/50 bg-card/40 p-4">
               <div className="mb-1 flex items-baseline justify-between gap-2">
                 <p className="text-[10px] uppercase tracking-widest text-muted-foreground">
                   Abandono do formulário
@@ -784,7 +784,7 @@ function StatsPage() {
 
             {/* Pipeline projetado */}
 
-            <section className="rounded-lg border border-[color:var(--gold)]/30 bg-gradient-to-br from-[color:var(--gold)]/[0.06] to-transparent p-4">
+            <section className="order-2 rounded-lg border border-[color:var(--gold)]/30 bg-gradient-to-br from-[color:var(--gold)]/[0.06] to-transparent p-4">
               <div className="flex items-baseline justify-between gap-2">
                 <p className="text-[10px] uppercase tracking-widest text-muted-foreground">
                   Pipeline projetado
@@ -858,9 +858,9 @@ function StatsPage() {
 
             </TabsContent>
 
-            <TabsContent value="coortes" className="space-y-4">
+            <TabsContent value="coortes" className="flex flex-col gap-4">
             {/* Coorte por período */}
-            <section className="rounded-lg border border-border/50 bg-card/40 p-4">
+            <section className="order-1 rounded-lg border border-border/50 bg-card/40 p-4">
               <div className="flex items-baseline justify-between gap-2 text-[10px] uppercase tracking-widest text-muted-foreground">
                 <span>Funil por coorte</span>
                 <div className="flex gap-1">
@@ -939,7 +939,7 @@ function StatsPage() {
             </section>
 
             {/* Coortes semanais */}
-            <section className="rounded-lg border border-border/50 bg-card/40 p-4">
+            <section className="order-2 rounded-lg border border-border/50 bg-card/40 p-4">
               <div className="mb-2 flex flex-wrap items-baseline justify-between gap-2">
                 <p className="text-[10px] uppercase tracking-widest text-muted-foreground">
                   Coortes semanais
@@ -1027,9 +1027,9 @@ function StatsPage() {
 
             </TabsContent>
 
-            <TabsContent value="tempo" className="space-y-4">
+            <TabsContent value="tempo" className="flex flex-col gap-4">
             {/* Quando o lead aplica */}
-            <section className="rounded-lg border border-border/50 bg-card/40 p-4">
+            <section className="order-8 rounded-lg border border-border/50 bg-card/40 p-4">
               <p className="mb-1 text-[10px] uppercase tracking-widest text-muted-foreground">
                 Quando o lead aplica
               </p>
@@ -1178,7 +1178,7 @@ function StatsPage() {
 
 
             {/* Ligações por dia */}
-            <section className="rounded-lg border border-border/50 bg-card/40 p-4">
+            <section className="order-7 rounded-lg border border-border/50 bg-card/40 p-4">
               <p className="mb-1 text-[10px] uppercase tracking-widest text-muted-foreground">
                 Ligações por dia
               </p>
@@ -1251,7 +1251,7 @@ function StatsPage() {
             </section>
 
             {/* TTFC */}
-            <section className="rounded-lg border border-border/50 bg-card/40 p-4">
+            <section className="order-1 rounded-lg border border-border/50 bg-card/40 p-4">
               <p className="mb-3 text-[10px] uppercase tracking-widest text-muted-foreground">
                 Tempo até 1º contato
               </p>
@@ -1288,7 +1288,7 @@ function StatsPage() {
             </section>
 
             {/* Velocidade de contato × conversão */}
-            <section className="rounded-lg border border-border/50 bg-card/40 p-4">
+            <section className="order-6 rounded-lg border border-border/50 bg-card/40 p-4">
               <p className="mb-1 text-[10px] uppercase tracking-widest text-muted-foreground">
                 Velocidade de contato × conversão
               </p>
@@ -1395,7 +1395,7 @@ function StatsPage() {
 
 
             {/* Ciclo de venda */}
-            <section className="rounded-lg border border-border/50 bg-card/40 p-4">
+            <section className="order-3 rounded-lg border border-border/50 bg-card/40 p-4">
               <p className="mb-3 text-[10px] uppercase tracking-widest text-muted-foreground">
                 Ciclo de venda
               </p>
@@ -1435,7 +1435,7 @@ function StatsPage() {
             </section>
 
             {/* Aging por etapa */}
-            <section className="rounded-lg border border-border/50 bg-card/40 p-4">
+            <section className="order-5 rounded-lg border border-border/50 bg-card/40 p-4">
               <p className="mb-1 text-[10px] uppercase tracking-widest text-muted-foreground">
                 Tempo parado em cada etapa
               </p>
@@ -1519,7 +1519,7 @@ function StatsPage() {
 
 
 
-            <section className="rounded-lg border border-border/50 bg-card/40 p-4">
+            <section className="order-4 rounded-lg border border-border/50 bg-card/40 p-4">
               <div className="flex items-baseline justify-between text-[10px] uppercase tracking-widest text-muted-foreground">
                 <span>Tentativas até contato</span>
                 <span className="text-muted-foreground/70 normal-case tracking-normal">
@@ -1580,7 +1580,7 @@ function StatsPage() {
             </section>
 
             {/* Momento */}
-            <section className="rounded-lg border border-border/50 bg-card/40 p-4">
+            <section className="order-2 rounded-lg border border-border/50 bg-card/40 p-4">
               <div className="flex items-baseline justify-between text-[10px] uppercase tracking-widest text-muted-foreground">
                 <span>Distribuição por momento</span>
                 <span className="text-muted-foreground/70 normal-case tracking-normal">
@@ -1614,7 +1614,7 @@ function StatsPage() {
 
             </TabsContent>
 
-            <TabsContent value="faturamento" className="space-y-4">
+            <TabsContent value="faturamento" className="flex flex-col gap-4">
             {/* Faturamento */}
             <section className="rounded-lg border border-border/50 bg-card/40 p-4">
               <div className="flex items-baseline justify-between text-[10px] uppercase tracking-widest text-muted-foreground">
