@@ -1,15 +1,82 @@
+import { useEffect, useRef, useState } from "react";
 import { Section } from "./Section";
 
 const stats = [
   {
-    value: "R$ 13.616.270,93",
-    label: "Faturamento histórico da operação",
+    amount: 13616270.93,
+    // nbsp entre "da" e "operação" pra "da" nunca ficar órfão na quebra
+    label: "Faturamento histórico da operação",
   },
   {
-    value: "R$ 353.087,58",
-    label: "Faturado em um único mês",
+    amount: 353087.58,
+    label: "Faturado em um único mês",
   },
 ];
+
+function formatBRL(n: number): string {
+  return n.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+}
+
+// Conta de R$ 0 até o valor final quando entra na viewport.
+function CountUp({ amount, duration = 2000 }: { amount: number; duration?: number }) {
+  const ref = useRef<HTMLParagraphElement>(null);
+  const [display, setDisplay] = useState(0);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setDisplay(amount);
+      return;
+    }
+
+    let raf = 0;
+    let started = false;
+    const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+
+    const run = () => {
+      const start = performance.now();
+      const tick = (now: number) => {
+        const t = Math.min((now - start) / duration, 1);
+        setDisplay(amount * easeOutCubic(t));
+        if (t < 1) raf = requestAnimationFrame(tick);
+      };
+      raf = requestAnimationFrame(tick);
+    };
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started) {
+          started = true;
+          run();
+          io.disconnect();
+        }
+      },
+      { threshold: 0.4 },
+    );
+    io.observe(el);
+
+    return () => {
+      io.disconnect();
+      cancelAnimationFrame(raf);
+    };
+  }, [amount, duration]);
+
+  return (
+    <p
+      ref={ref}
+      className="relative font-serif text-3xl font-normal tabular-nums text-gold-gradient sm:text-4xl"
+    >
+      {formatBRL(display)}
+    </p>
+  );
+}
 
 export function Numbers() {
   return (
@@ -37,14 +104,12 @@ export function Numbers() {
               aria-hidden
               className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(212,175,55,0.1),transparent_65%)]"
             />
-            <p className="relative font-serif text-3xl font-normal text-gold-gradient sm:text-4xl">
-              {s.value}
-            </p>
+            <CountUp amount={s.amount} />
             <span
               aria-hidden
               className="relative mx-auto mt-4 block h-px w-8 bg-gold-gradient opacity-60"
             />
-            <p className="relative mt-4 font-sans text-[13px] uppercase tracking-[0.18em] text-muted-foreground">
+            <p className="relative mt-4 font-sans text-[13px] uppercase tracking-[0.18em] text-balance text-muted-foreground">
               {s.label}
             </p>
           </div>
