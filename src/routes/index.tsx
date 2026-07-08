@@ -13,6 +13,7 @@ import { Investment } from "@/components/noir/Investment";
 import { FAQ } from "@/components/noir/FAQ";
 import { ApplicationForm } from "@/components/noir/ApplicationForm";
 import { Footer } from "@/components/noir/Footer";
+import { MusicPlayer } from "@/components/noir/MusicPlayer";
 import { Divider } from "@/components/noir/Section";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
@@ -64,6 +65,7 @@ function LandingPage() {
       <FAQ />
       <ApplicationForm />
       <Footer />
+      <MusicPlayer />
     </main>
   );
 }

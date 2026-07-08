@@ -203,3 +203,9 @@
     animation-delay: var(--hero-delay, 0ms);
   }
 }
+
+/* Equalizer do player de música */
+@keyframes eq {
+  0%, 100% { height: 6px; }
+  50% { height: 16px; }
+}
