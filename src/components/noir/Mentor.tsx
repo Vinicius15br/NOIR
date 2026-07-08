@@ -3,7 +3,7 @@ import { Section } from "./Section";
 export function Mentor() {
   return (
     <Section id="mentor" eyebrow="Quem conduz">
-      <h2 className="font-serif text-3xl leading-tight font-normal text-foreground sm:text-5xl">
+      <h2 className="font-serif text-3xl leading-tight font-normal text-balance text-foreground sm:text-5xl">
         Quem vai olhar pra{" "}
         <span className="italic text-gold-gradient">sua operação...</span>
       </h2>

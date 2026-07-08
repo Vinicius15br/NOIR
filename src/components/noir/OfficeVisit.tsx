@@ -9,7 +9,7 @@ export function OfficeVisit() {
           className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-[radial-gradient(circle,oklch(0.82_0.13_85/22%),transparent_70%)] blur-2xl"
         />
         <div className="relative">
-          <h2 className="font-serif text-3xl leading-[1.15] font-normal text-foreground sm:text-5xl">
+          <h2 className="font-serif text-3xl leading-[1.15] font-normal text-balance text-foreground sm:text-5xl">
             Você vai ver a operação por dentro.{" "}
             <span className="italic text-gold-gradient">Presencialmente.</span>
           </h2>

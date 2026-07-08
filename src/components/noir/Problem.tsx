@@ -3,7 +3,7 @@ import { Section } from "./Section";
 export function Problem() {
   return (
     <Section id="problema" eyebrow="O problema">
-      <h2 className="font-serif text-3xl leading-[1.15] font-normal text-foreground sm:text-5xl">
+      <h2 className="font-serif text-3xl leading-[1.15] font-normal text-balance text-foreground sm:text-5xl">
         Você não precisa de mais conteúdo. Precisa de alguém{" "}
         <span className="italic text-gold-gradient">olhando pra SUA operação.</span>
       </h2>

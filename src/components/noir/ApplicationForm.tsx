@@ -150,7 +150,7 @@ export function ApplicationForm() {
             <span className="font-serif text-3xl text-gold-gradient">✦</span>
             <span className="h-px w-10 bg-gold-gradient" />
           </div>
-          <h2 className="font-serif text-3xl font-normal text-foreground sm:text-4xl">
+          <h2 className="font-serif text-3xl font-normal text-balance text-foreground sm:text-4xl">
             Candidatura recebida
           </h2>
           <p className="mx-auto mt-6 max-w-md font-sans text-[15px] leading-relaxed text-muted-foreground">
@@ -173,7 +173,7 @@ export function ApplicationForm() {
 
   return (
     <Section id="candidatura" eyebrow="Formulário de candidatura" className="pb-32">
-      <h2 className="font-serif text-3xl leading-tight font-normal text-foreground sm:text-5xl">
+      <h2 className="font-serif text-3xl leading-tight font-normal text-balance text-foreground sm:text-5xl">
         Candidate-se para uma das{" "}
         <span className="italic text-gold-gradient">vagas</span>
       </h2>

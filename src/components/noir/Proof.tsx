@@ -65,7 +65,7 @@ export function Proof() {
             Provas reais
           </span>
         </div>
-        <h2 className="font-serif text-3xl leading-[1.15] font-normal text-foreground sm:text-5xl">
+        <h2 className="font-serif text-3xl leading-[1.15] font-normal text-balance text-foreground sm:text-5xl">
           Não é teoria. São{" "}
           <span className="italic text-gold-gradient">vendas reais</span>{" "}
           fechadas dentro da operação.

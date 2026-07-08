@@ -36,7 +36,7 @@ const calls = [
 export function HowItWorks() {
   return (
     <Section id="como-funciona" eyebrow="Como funciona">
-      <h2 className="font-serif text-3xl leading-[1.15] font-normal text-foreground sm:text-5xl">
+      <h2 className="font-serif text-3xl leading-[1.15] font-normal text-balance text-foreground sm:text-5xl">
         <span className="italic text-gold-gradient">6 calls</span> individuais.
         Até 2 horas cada. Só você e a operação.
       </h2>

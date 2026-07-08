@@ -44,7 +44,7 @@ const faqs = [
 export function FAQ() {
   return (
     <Section id="faq" eyebrow="Perguntas frequentes">
-      <h2 className="font-serif text-3xl leading-tight font-normal text-foreground sm:text-5xl">
+      <h2 className="font-serif text-3xl leading-tight font-normal text-balance text-foreground sm:text-5xl">
         Antes que você{" "}
         <span className="italic text-gold-gradient">pergunte</span>
       </h2>

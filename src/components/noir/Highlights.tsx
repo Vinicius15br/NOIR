@@ -18,7 +18,7 @@ const pillars = [
 export function Highlights() {
   return (
     <Section id="acompanhamento" eyebrow="O acompanhamento">
-      <h2 className="font-serif text-3xl leading-[1.15] font-normal text-foreground sm:text-4xl">
+      <h2 className="font-serif text-3xl leading-[1.15] font-normal text-balance text-foreground sm:text-4xl">
         O que o ciclo{" "}
         <span className="italic text-gold-gradient">inclui</span>
       </h2>

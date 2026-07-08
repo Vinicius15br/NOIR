@@ -642,7 +642,7 @@ function StatsPage() {
               <p className="mb-3 text-[10px] uppercase tracking-widest text-muted-foreground">
                 Funil
               </p>
-              <div className="grid grid-cols-4 gap-2 sm:gap-3">
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
                 <FunnelStage label="Aplicações" value={totalCount} />
                 <FunnelStage
                   label="Contatados"
@@ -891,7 +891,7 @@ function StatsPage() {
                 </p>
               ) : (
                 <>
-                  <div className="mt-3 grid grid-cols-4 gap-2 sm:gap-3">
+                  <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
                     <FunnelStage label="Criados" value={cohortTotal} />
                     <FunnelStage
                       label="Contatados"

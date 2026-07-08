@@ -18,7 +18,7 @@ const items = [
 export function Bonus() {
   return (
     <Section id="bonus" eyebrow="Bônus">
-      <h2 className="font-serif text-3xl leading-tight font-normal text-foreground sm:text-5xl">
+      <h2 className="font-serif text-3xl leading-tight font-normal text-balance text-foreground sm:text-5xl">
         O que você leva{" "}
         <span className="italic text-gold-gradient">
           {"\n"}além das calls?

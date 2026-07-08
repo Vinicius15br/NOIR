@@ -9,7 +9,7 @@ const steps = [
 export function Investment() {
   return (
     <Section id="investimento" eyebrow="Investimento + Seleção">
-      <h2 className="font-serif text-3xl leading-[1.15] font-normal text-foreground sm:text-5xl">
+      <h2 className="font-serif text-3xl leading-[1.15] font-normal text-balance text-foreground sm:text-5xl">
         Como funciona a{" "}
         <span className="italic text-gold-gradient">entrada</span>
       </h2>

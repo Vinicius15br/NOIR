@@ -14,9 +14,12 @@ const stats = [
 export function Numbers() {
   return (
     <Section id="numeros" eyebrow="A operação em números">
-      <h2 className="font-serif text-3xl leading-[1.15] font-normal text-foreground sm:text-5xl">
+      <h2 className="font-serif text-3xl leading-[1.15] font-normal text-balance text-foreground sm:text-5xl">
         Uma operação que já movimentou{" "}
-        <span className="italic text-gold-gradient">R$ 13,6 milhões</span>.
+        <span className="whitespace-nowrap italic text-gold-gradient">
+          R$&nbsp;13,6&nbsp;milhões
+        </span>
+        .
       </h2>
       <p className="mt-6 font-sans text-base leading-relaxed text-muted-foreground sm:text-[17px]">
         Não é promessa nem projeção. É o histórico real da agência que conduz

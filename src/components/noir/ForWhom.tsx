@@ -17,7 +17,7 @@ const notForYou = [
 export function ForWhom() {
   return (
     <Section id="para-quem" eyebrow="Para quem é">
-      <h2 className="font-serif text-3xl leading-tight font-normal text-foreground sm:text-4xl">
+      <h2 className="font-serif text-3xl leading-tight font-normal text-balance text-foreground sm:text-4xl">
         Não é pra todo mundo — e essa é a ideia.
       </h2>
 
