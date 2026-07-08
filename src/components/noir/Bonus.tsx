@@ -29,11 +29,11 @@ export function Bonus() {
         {items.map((it) => (
           <li
             key={it.title}
-            className="flex gap-5 border-t border-border/60 pt-6 first:border-t-0 first:pt-0"
+            className="group flex gap-5 rounded-lg border-t border-border/60 p-4 pt-6 transition-colors duration-300 first:border-t-0 hover:bg-card/40"
           >
-            <div className="mt-2 h-1.5 w-1.5 shrink-0 rotate-45 bg-gold-gradient" />
+            <div className="mt-2 h-1.5 w-1.5 shrink-0 rotate-45 bg-gold-gradient transition-transform duration-300 group-hover:scale-150" />
             <div className="min-w-0">
-              <h3 className="font-serif text-xl font-semibold text-foreground">
+              <h3 className="font-serif text-xl font-semibold text-foreground transition-colors duration-300 group-hover:text-gold-gradient">
                 {it.title}
               </h3>
               <p className="mt-2 font-sans text-[15px] leading-relaxed text-muted-foreground">

@@ -22,7 +22,7 @@ export function ForWhom() {
       </h2>
 
       <div className="mt-12 grid gap-6 md:grid-cols-2">
-        <div className="rounded-sm border border-gold-soft bg-card/60 p-7 backdrop-blur-sm">
+        <div className="rounded-sm border border-gold-soft bg-card/60 p-7 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-[color:var(--gold)]/60 hover:shadow-[0_16px_40px_-20px_rgba(212,175,55,0.5)]">
           <h3 className="font-serif text-lg font-semibold text-gold-gradient">
             É pra você se
           </h3>
@@ -42,7 +42,7 @@ export function ForWhom() {
           </ul>
         </div>
 
-        <div className="rounded-sm border border-border/60 bg-card/30 p-7 backdrop-blur-sm">
+        <div className="rounded-sm border border-border/60 bg-card/30 p-7 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-border hover:bg-card/50">
           <h3 className="font-serif text-lg font-semibold text-muted-foreground">
             NÃO é pra você se
           </h3>

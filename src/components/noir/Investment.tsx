@@ -21,7 +21,7 @@ export function Investment() {
         comporta poucas vagas sem comprometer a qualidade da análise.
       </p>
 
-      <div className="mt-10 grid gap-6 rounded-sm border border-gold-soft bg-card/50 p-8 sm:grid-cols-[1fr_auto] sm:items-center sm:p-12">
+      <div className="mt-10 grid gap-6 rounded-sm border border-gold-soft bg-card/50 p-8 transition-all duration-300 hover:border-[color:var(--gold)]/60 hover:shadow-[0_0_50px_-14px_rgba(212,175,55,0.5)] sm:grid-cols-[1fr_auto] sm:items-center sm:p-12">
         <div>
           <p className="font-sans text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
             Investimento

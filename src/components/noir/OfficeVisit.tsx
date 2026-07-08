@@ -3,7 +3,7 @@ import { Section } from "./Section";
 export function OfficeVisit() {
   return (
     <Section id="visita" eyebrow="Diferencial · Presencial">
-      <div className="relative overflow-hidden rounded-sm border border-gold-soft bg-card/50 p-8 backdrop-blur-sm sm:p-14">
+      <div className="group relative overflow-hidden rounded-sm border border-gold-soft bg-card/50 p-8 backdrop-blur-sm transition-all duration-300 hover:border-[color:var(--gold)]/60 hover:shadow-[0_0_60px_-16px_rgba(212,175,55,0.5)] sm:p-14">
         <div
           aria-hidden
           className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-[radial-gradient(circle,oklch(0.82_0.13_85/22%),transparent_70%)] blur-2xl"

@@ -24,13 +24,13 @@ function PrintCard({
   caption: string;
 }) {
   return (
-    <figure className="w-[280px] shrink-0 snap-center sm:w-full">
-      <div className="relative overflow-hidden rounded-xl border border-gold-soft bg-background shadow-[0_0_50px_-14px_rgba(212,175,55,0.4)]">
+    <figure className="group w-[280px] shrink-0 snap-center sm:w-full">
+      <div className="relative overflow-hidden rounded-xl border border-gold-soft bg-background shadow-[0_0_50px_-14px_rgba(212,175,55,0.4)] transition-all duration-300 group-hover:-translate-y-1 group-hover:border-[color:var(--gold)]/70 group-hover:shadow-[0_0_60px_-10px_rgba(212,175,55,0.6)]">
         <img
           src={src}
           alt={`Print de venda — ${caption}`}
           loading="lazy"
-          className="block w-full object-contain"
+          className="block w-full object-contain transition-transform duration-500 group-hover:scale-[1.04]"
         />
         {/* selo de valor */}
         <div className="absolute right-3 top-3 rounded-md bg-gradient-to-b from-amber-300 to-amber-600 px-2.5 py-1 shadow-lg">
