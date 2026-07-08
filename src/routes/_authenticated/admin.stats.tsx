@@ -325,6 +325,60 @@ function StatsPage() {
   const cycleMinMs = cycleMsList.length ? Math.min(...cycleMsList) : null;
   const cycleMaxMs = cycleMsList.length ? Math.max(...cycleMsList) : null;
 
+  // ── Faturamento (caixa realizado) ────────────────────────────────
+  // Data de fechamento por lead: evento status→fechado, ou created_at como fallback.
+  const closedAtByLead = new Map<string, Date>();
+  for (const a of data ?? []) {
+    if ((a.status ?? "novo") !== "fechado") continue;
+    closedAtByLead.set(a.id, new Date(firstClosedAt.get(a.id) ?? a.created_at));
+  }
+  const revenueRealized = closedCount * TICKET_BRL;
+  const nowMonth = new Date();
+  const revenueThisMonthCount = [...closedAtByLead.values()].filter(
+    (d) =>
+      d.getFullYear() === nowMonth.getFullYear() &&
+      d.getMonth() === nowMonth.getMonth(),
+  ).length;
+  const revenueThisMonth = revenueThisMonthCount * TICKET_BRL;
+
+  // Receita por faixa de faturamento do lead
+  const revenueByBand = revenueBands.map((b) => {
+    const inBand = (data ?? []).filter((a) => a.revenue_band === b.key);
+    const closedInBand = inBand.filter(
+      (a) => (a.status ?? "novo") === "fechado",
+    ).length;
+    return {
+      key: b.key,
+      label: b.label,
+      color: b.color,
+      total: inBand.length,
+      closed: closedInBand,
+      revenue: closedInBand * TICKET_BRL,
+      closeRate: inBand.length
+        ? Math.round((closedInBand / inBand.length) * 100)
+        : 0,
+    };
+  });
+  const revenueByBandMax = Math.max(1, ...revenueByBand.map((b) => b.revenue));
+
+  // Evolução mensal do faturamento (últimos 6 meses com fechamento)
+  const monthlyRevenueMap = new Map<string, number>();
+  for (const d of closedAtByLead.values()) {
+    const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+    monthlyRevenueMap.set(key, (monthlyRevenueMap.get(key) ?? 0) + TICKET_BRL);
+  }
+  const monthlyRevenue = [...monthlyRevenueMap.entries()]
+    .sort(([a], [b]) => a.localeCompare(b))
+    .slice(-6)
+    .map(([key, value]) => {
+      const [y, m] = key.split("-").map(Number);
+      const label = new Date(y, m - 1, 1)
+        .toLocaleDateString("pt-BR", { month: "short" })
+        .replace(".", "");
+      return { key, label: `${label}/${String(y).slice(2)}`, value };
+    });
+  const monthlyRevenueMax = Math.max(1, ...monthlyRevenue.map((m) => m.value));
+
   // Períodos semanais — agrupa leads por semana ISO (segunda) de criação
   const uniqueSourcesStats = Array.from(
     new Set(
@@ -1640,8 +1694,65 @@ function StatsPage() {
             </TabsContent>
 
             <TabsContent value="faturamento" className="flex flex-col gap-4">
+            {/* Caixa realizado */}
+            <section className="order-1 rounded-xl border border-[color:var(--gold)]/30 bg-gradient-to-br from-[color:var(--gold)]/[0.08] to-transparent p-5 sm:p-6">
+              <p className="text-[10px] uppercase tracking-[0.22em] text-gold-gradient font-semibold">
+                Caixa realizado
+              </p>
+              <p className="mt-2 font-serif text-4xl leading-none text-gold-gradient sm:text-5xl">
+                {fmtBRL(revenueRealized)}
+              </p>
+              <p className="mt-3 text-[11px] text-muted-foreground">
+                <span className="text-foreground">{fmtBRL(revenueThisMonth)}</span>{" "}
+                no mês · <span className="text-foreground">{closedCount}</span>{" "}
+                {closedCount === 1 ? "fechado" : "fechados"} no total · ticket R$ 10k
+              </p>
+            </section>
+
+            {/* Receita por faixa de faturamento */}
+            <section className="order-2 rounded-xl border border-border/60 bg-gradient-to-b from-card/70 to-card/20 p-5 sm:p-6">
+              <p className="text-[10px] uppercase tracking-[0.22em] text-gold-gradient font-semibold">
+                Receita por faixa (do lead)
+              </p>
+              <p className="mb-3 mt-1 text-[11px] text-muted-foreground/70">
+                Quais faixas de faturamento do lead mais viram cliente e geram caixa.
+              </p>
+              {revenueByBand.every((b) => b.total === 0) ? (
+                <p className="text-xs text-muted-foreground">
+                  Nenhum lead informou faturamento ainda.
+                </p>
+              ) : (
+                <div className="space-y-2.5">
+                  {revenueByBand.map((b) => (
+                    <div
+                      key={b.key}
+                      className="flex items-center gap-2.5 text-[11px]"
+                    >
+                      <span className="w-14 shrink-0 text-muted-foreground">
+                        {b.label}
+                      </span>
+                      <div className="h-2 flex-1 overflow-hidden rounded-full bg-border/40">
+                        <div
+                          className={b.color}
+                          style={{
+                            width: `${(b.revenue / revenueByBandMax) * 100}%`,
+                          }}
+                        />
+                      </div>
+                      <span className="w-[70px] shrink-0 text-right tabular-nums text-foreground">
+                        {fmtBRL(b.revenue)}
+                      </span>
+                      <span className="w-9 shrink-0 text-right text-muted-foreground/70">
+                        {b.total ? `${b.closeRate}%` : "—"}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </section>
+
             {/* Faturamento */}
-            <section className="rounded-xl border border-border/60 bg-gradient-to-b from-card/70 to-card/20 p-5 sm:p-6">
+            <section className="order-3 rounded-xl border border-border/60 bg-gradient-to-b from-card/70 to-card/20 p-5 sm:p-6">
               <div className="flex items-baseline justify-between text-[10px] uppercase tracking-[0.22em] text-gold-gradient font-semibold">
                 <span>Distribuição por faturamento</span>
                 <span className="text-muted-foreground/70 normal-case tracking-normal">
@@ -1701,6 +1812,45 @@ function StatsPage() {
                 <p className="mt-2 text-[10px] text-amber-300/90">
                   · só {revenueFillPct}% preenchem — campo não está servindo pra priorizar, considera torná-lo obrigatório ou trocar as faixas
                 </p>
+              )}
+            </section>
+
+            {/* Evolução mensal */}
+            <section className="order-4 rounded-xl border border-border/60 bg-gradient-to-b from-card/70 to-card/20 p-5 sm:p-6">
+              <p className="text-[10px] uppercase tracking-[0.22em] text-gold-gradient font-semibold">
+                Evolução mensal
+              </p>
+              <p className="mb-3 mt-1 text-[11px] text-muted-foreground/70">
+                Receita fechada mês a mês (fechados × R$ 10k).
+              </p>
+              {monthlyRevenue.length === 0 ? (
+                <p className="text-xs text-muted-foreground">
+                  Nenhum fechamento registrado ainda.
+                </p>
+              ) : (
+                <div className="space-y-2">
+                  {monthlyRevenue.map((m) => (
+                    <div
+                      key={m.key}
+                      className="flex items-center gap-3 text-[11px]"
+                    >
+                      <span className="w-12 shrink-0 uppercase tracking-wide text-muted-foreground">
+                        {m.label}
+                      </span>
+                      <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-border/40">
+                        <div
+                          className="h-full rounded-full bg-gradient-to-r from-[color:var(--gold)]/50 to-[color:var(--gold)]/90"
+                          style={{
+                            width: `${(m.value / monthlyRevenueMax) * 100}%`,
+                          }}
+                        />
+                      </div>
+                      <span className="w-20 shrink-0 text-right tabular-nums text-foreground">
+                        {fmtBRL(m.value)}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               )}
             </section>
             </TabsContent>
