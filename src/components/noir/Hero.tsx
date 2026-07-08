@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { Wordmark } from "./Wordmark";
 
 export function Hero() {
@@ -15,7 +16,10 @@ export function Hero() {
       </nav>
 
       <div className="relative mx-auto mt-20 flex w-full max-w-3xl flex-col items-center text-center sm:mt-28">
-        <div className="mb-8 flex items-center gap-3">
+        <div
+          className="hero-enter mb-8 flex items-center gap-3"
+          style={{ "--hero-delay": "120ms" } as CSSProperties}
+        >
           <span className="h-px w-10 bg-gold-gradient" />
           <span className="font-sans text-[10px] uppercase tracking-[0.36em] text-gold-gradient font-semibold">
             POUCAS VAGAS
@@ -23,13 +27,19 @@ export function Hero() {
           <span className="h-px w-10 bg-gold-gradient" />
         </div>
 
-        <h1 className="font-serif text-[34px] leading-[1.08] font-normal text-foreground sm:text-6xl md:text-7xl">
+        <h1
+          className="hero-enter font-serif text-[34px] leading-[1.08] font-normal text-foreground sm:text-6xl md:text-7xl"
+          style={{ "--hero-delay": "260ms" } as CSSProperties}
+        >
           Acompanhamento{" "}
           <span className="italic text-gold-gradient">individual</span> pra
           estruturar e escalar sua operação de agência.
         </h1>
 
-        <div className="mt-16 flex flex-col items-center gap-3">
+        <div
+          className="hero-enter mt-16 flex flex-col items-center gap-3"
+          style={{ "--hero-delay": "560ms" } as CSSProperties}
+        >
           <span className="font-sans text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
             Role para descobrir
           </span>

@@ -79,7 +79,10 @@ export function Proof() {
 
       {/* galeria: rolagem horizontal no mobile, grade no desktop */}
       <div className="mx-auto mt-12 w-full max-w-3xl">
-        <div className="flex snap-x snap-mandatory justify-start gap-5 overflow-x-auto px-1 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:grid sm:grid-cols-2 sm:justify-center sm:overflow-visible sm:pb-0 lg:gap-8">
+        <div
+          data-reveal-group
+          className="flex snap-x snap-mandatory justify-start gap-5 overflow-x-auto px-1 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:grid sm:grid-cols-2 sm:justify-center sm:overflow-visible sm:pb-0 lg:gap-8"
+        >
           {prints.map((p) => (
             <PrintCard key={p.src} src={p.src} value={p.value} caption={p.caption} />
           ))}

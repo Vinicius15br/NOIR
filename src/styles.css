@@ -143,18 +143,63 @@
   }
 }
 
-/* Scroll reveal — classes aplicadas via use-scroll-reveal.ts */
+/* Scroll reveal — variantes aplicadas via use-scroll-reveal.ts.
+   Easing "easeOutExpo" pra um assentamento suave e premium. */
 @media (prefers-reduced-motion: no-preference) {
-  .reveal {
+  .rv {
+    --rv-ease: cubic-bezier(0.16, 1, 0.3, 1);
     opacity: 0;
-    transform: translateY(26px);
+    will-change: opacity, transform, filter;
     transition:
-      opacity 0.7s ease var(--reveal-delay, 0ms),
-      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms);
-    will-change: opacity, transform;
+      opacity 0.85s var(--rv-ease) var(--reveal-delay, 0ms),
+      transform 0.85s var(--rv-ease) var(--reveal-delay, 0ms),
+      filter 0.85s ease var(--reveal-delay, 0ms);
   }
-  .reveal-visible {
+
+  /* Texto e blocos gerais: sobem */
+  .rv-up {
+    transform: translateY(34px);
+  }
+  /* Títulos: entram em foco (desfoque → nítido) subindo de leve */
+  .rv-blur {
+    transform: translateY(20px);
+    filter: blur(12px);
+  }
+  /* Imagens e prints: leve zoom de aproximação */
+  .rv-scale {
+    transform: scale(0.92) translateY(20px);
+  }
+  /* Cards: deslizam lateralmente, alternando o lado */
+  .rv-left {
+    transform: translateX(-40px);
+  }
+  .rv-right {
+    transform: translateX(40px);
+  }
+
+  .rv-in {
     opacity: 1;
     transform: none;
+    filter: none;
+  }
+
+  /* Entrada do hero no carregamento (sequência escalonada) */
+  @keyframes hero-enter {
+    from {
+      opacity: 0;
+      transform: translateY(26px);
+      filter: blur(10px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+      filter: none;
+    }
+  }
+  .hero-enter {
+    opacity: 0;
+    animation: hero-enter 1s var(--rv-ease, cubic-bezier(0.16, 1, 0.3, 1))
+      both;
+    animation-delay: var(--hero-delay, 0ms);
   }
 }
