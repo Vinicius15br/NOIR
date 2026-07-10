@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { Section } from "./Section";
 
 const calls = [
@@ -34,6 +35,34 @@ const calls = [
 ];
 
 export function HowItWorks() {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const lineRef = useRef<HTMLSpanElement>(null);
+
+  // Linha dourada da timeline que se "desenha" conforme a seção rola.
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const track = trackRef.current;
+    const line = lineRef.current;
+    if (!track || !line) return;
+
+    const onScroll = () => {
+      const r = track.getBoundingClientRect();
+      const prog = Math.min(
+        1,
+        Math.max(0, (window.innerHeight * 0.78 - r.top) / r.height),
+      );
+      line.style.transform = `scaleY(${prog})`;
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
   return (
     <Section id="como-funciona" eyebrow="Como funciona">
       <h2 className="font-serif text-3xl leading-[1.15] font-normal text-balance text-foreground sm:text-5xl">
@@ -41,25 +70,39 @@ export function HowItWorks() {
         Até 2 horas cada. Só você e a operação.
       </h2>
 
-      <div className="mt-14 grid gap-5 sm:grid-cols-2">
-        {calls.map((c) => (
-          <article
-            key={c.n}
-            className="group relative overflow-hidden rounded-sm border border-border/70 bg-card/40 p-7 transition-all duration-300 hover:border-gold-soft hover:bg-card/70"
-          >
-            <div className="flex items-baseline gap-4">
-              <span className="font-serif text-4xl font-normal text-gold-gradient italic">
-                {c.n}
-              </span>
-              <h3 className="font-serif text-lg font-semibold text-foreground">
-                {c.title}
-              </h3>
-            </div>
-            <p className="mt-4 font-sans text-[14.5px] leading-relaxed text-muted-foreground">
-              {c.body}
-            </p>
-          </article>
-        ))}
+      {/* Timeline vertical: trilho + linha que se desenha + cards com nó */}
+      <div ref={trackRef} className="relative mt-14 pl-11">
+        <div className="absolute inset-y-1.5 left-2.5 w-px bg-border/40" />
+        <span
+          ref={lineRef}
+          aria-hidden
+          className="absolute inset-y-1.5 left-2.5 w-px origin-top scale-y-0 bg-gradient-to-b from-[color:var(--gold-deep)] via-[color:var(--gold-bright)] to-[color:var(--gold-deep)] shadow-[0_0_10px_rgba(212,175,55,0.45)] will-change-transform"
+        />
+
+        <div className="flex flex-col gap-7">
+          {calls.map((c) => (
+            <article
+              key={c.n}
+              className="group relative overflow-hidden rounded-sm border border-border/70 bg-card/40 p-7 transition-all duration-300 hover:-translate-x-0 hover:translate-x-1 hover:border-gold-soft hover:bg-card/70"
+            >
+              <span
+                aria-hidden
+                className="absolute -left-[39px] top-[38px] block h-[9px] w-[9px] rotate-45 bg-gold-gradient shadow-[0_0_12px_rgba(212,175,55,0.6)]"
+              />
+              <div className="flex items-baseline gap-4">
+                <span className="font-serif text-4xl font-normal text-gold-gradient italic">
+                  {c.n}
+                </span>
+                <h3 className="font-serif text-lg font-semibold text-foreground">
+                  {c.title}
+                </h3>
+              </div>
+              <p className="mt-4 font-sans text-[14.5px] leading-relaxed text-muted-foreground">
+                {c.body}
+              </p>
+            </article>
+          ))}
+        </div>
       </div>
 
       <p className="mt-10 border-l-2 border-gold-soft pl-5 font-sans text-sm italic leading-relaxed text-muted-foreground">

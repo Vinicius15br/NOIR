@@ -1,12 +1,26 @@
 import type { CSSProperties } from "react";
 import { Wordmark } from "./Wordmark";
 
+// Título do hero animado palavra por palavra (blur -> foco), em cascata.
+const TITLE_WORDS: { text: string; gold?: boolean }[] = [
+  { text: "Acompanhamento" },
+  { text: "individual", gold: true },
+  { text: "pra" },
+  { text: "estruturar" },
+  { text: "e" },
+  { text: "escalar" },
+  { text: "sua" },
+  { text: "operação" },
+  { text: "de" },
+  { text: "agência." },
+];
+
 export function Hero() {
   return (
     <header className="noir-grain relative overflow-hidden px-5 pt-8 pb-20 sm:px-8 sm:pt-12 sm:pb-32">
       <div
         aria-hidden
-        className="absolute left-1/2 top-0 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/3 rounded-full bg-[radial-gradient(circle,oklch(0.82_0.13_85/18%),transparent_70%)] blur-2xl"
+        className="absolute left-1/2 top-0 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/3 rounded-full bg-[radial-gradient(circle,oklch(0.82_0.13_85/18%),transparent_70%)] blur-2xl motion-safe:animate-[hero-glow_9s_ease-in-out_infinite]"
       />
       <nav className="relative mx-auto flex w-full max-w-5xl items-center justify-between">
         <Wordmark />
@@ -27,18 +41,26 @@ export function Hero() {
           <span className="h-px w-10 bg-gold-gradient" />
         </div>
 
-        <h1
-          className="hero-enter font-serif text-[34px] leading-[1.08] font-normal text-foreground sm:text-6xl md:text-7xl"
-          style={{ "--hero-delay": "260ms" } as CSSProperties}
-        >
-          Acompanhamento{" "}
-          <span className="italic text-gold-gradient">individual</span> pra
-          estruturar e escalar sua operação de agência.
+        <h1 className="font-serif text-[34px] leading-[1.08] font-normal text-foreground sm:text-6xl md:text-7xl">
+          {TITLE_WORDS.map((w, i) => (
+            <span
+              key={i}
+              className={
+                "hero-word inline-block" +
+                (w.gold ? " italic text-gold-gradient" : "")
+              }
+              // 260ms base + cascata de 70ms por palavra
+              style={{ "--hero-delay": `${260 + i * 70}ms` } as CSSProperties}
+            >
+              {w.text}
+              {i < TITLE_WORDS.length - 1 ? "\u00A0" : ""}
+            </span>
+          ))}
         </h1>
 
         <div
           className="hero-enter mt-16 flex flex-col items-center gap-3"
-          style={{ "--hero-delay": "560ms" } as CSSProperties}
+          style={{ "--hero-delay": "1250ms" } as CSSProperties}
         >
           <span className="font-sans text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
             Role para descobrir
