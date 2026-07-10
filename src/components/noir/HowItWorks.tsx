@@ -38,28 +38,45 @@ export function HowItWorks() {
   const trackRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLSpanElement>(null);
 
-  // Linha dourada da timeline que se "desenha" conforme a seção rola.
+  // Linha dourada que se "desenha" conforme a seção rola.
+  // Controla a ALTURA (não transform) pra não conflitar com o Tailwind,
+  // e escuta scroll no window E em qualquer container rolável ancestral.
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const track = trackRef.current;
     const line = lineRef.current;
     if (!track || !line) return;
 
-    const onScroll = () => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      line.style.height = "100%";
+      return;
+    }
+
+    let raf = 0;
+    const update = () => {
+      raf = 0;
       const r = track.getBoundingClientRect();
       const prog = Math.min(
         1,
         Math.max(0, (window.innerHeight * 0.78 - r.top) / r.height),
       );
-      line.style.transform = `scaleY(${prog})`;
+      line.style.height = `${prog * 100}%`;
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
     };
 
-    onScroll();
+    update();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
+    // Fallback: se a página rolar dentro de um container (não o window)
+    const scroller = track.closest<HTMLElement>("[data-scroll-container]");
+    scroller?.addEventListener("scroll", onScroll, { passive: true });
+
     return () => {
+      if (raf) cancelAnimationFrame(raf);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
+      scroller?.removeEventListener("scroll", onScroll);
     };
   }, []);
 
@@ -72,18 +89,21 @@ export function HowItWorks() {
 
       {/* Timeline vertical: trilho + linha que se desenha + cards com nó */}
       <div ref={trackRef} className="relative mt-14 pl-11">
-        <div className="absolute inset-y-1.5 left-2.5 w-px bg-border/40" />
+        {/* trilho base (sempre visível) */}
+        <span className="pointer-events-none absolute bottom-1.5 left-2.5 top-1.5 w-px bg-border/40" />
+        {/* linha dourada — altura controlada via JS (inicia em 0) */}
         <span
           ref={lineRef}
           aria-hidden
-          className="absolute inset-y-1.5 left-2.5 w-px origin-top scale-y-0 bg-gradient-to-b from-[color:var(--gold-deep)] via-[color:var(--gold-bright)] to-[color:var(--gold-deep)] shadow-[0_0_10px_rgba(212,175,55,0.45)] will-change-transform"
+          style={{ height: "0%" }}
+          className="pointer-events-none absolute left-2.5 top-1.5 w-px bg-gradient-to-b from-[color:var(--gold-deep)] via-[color:var(--gold-bright)] to-[color:var(--gold-deep)] shadow-[0_0_10px_rgba(212,175,55,0.45)]"
         />
 
         <div className="flex flex-col gap-7">
           {calls.map((c) => (
             <article
               key={c.n}
-              className="group relative overflow-hidden rounded-sm border border-border/70 bg-card/40 p-7 transition-all duration-300 hover:-translate-x-0 hover:translate-x-1 hover:border-gold-soft hover:bg-card/70"
+              className="group relative overflow-hidden rounded-sm border border-border/70 bg-card/40 p-7 transition-all duration-300 hover:translate-x-1 hover:border-gold-soft hover:bg-card/70"
             >
               <span
                 aria-hidden
