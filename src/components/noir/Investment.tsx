@@ -18,7 +18,7 @@ export function Investment() {
         O acompanhamento individual é limitado a{" "}
         <span className="text-foreground font-semibold">2 mentorados</span> por
         ciclo — é o Rafa quem conduz cada call, e a agenda da operação
-        comporta poucas vagas sem comprometer a qualidade da análise.
+        comporta poucas vagas sem comprometer a qualidade do acompanhamento.
       </p>
 
       <div className="mt-10 grid gap-6 rounded-sm border border-gold-soft bg-card/50 p-8 transition-all duration-300 hover:border-[color:var(--gold)]/60 hover:shadow-[0_0_50px_-14px_rgba(212,175,55,0.5)] sm:grid-cols-[1fr_auto] sm:items-center sm:p-12">
